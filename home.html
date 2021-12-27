@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20211227200940">
+	<link rel="stylesheet" href="css/style.min.css?_v=20211227212324">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -303,26 +303,36 @@
 							<h4 class="header-main__subtitle">GALLERY & LIVE STREAMS</h4>
 							<h2 class="header-main__title">Check out our hard workers</h2>
 						</div>
-						<ul class="gallery-body">
-							<li class="gallery-body__item">
-								<a href="#">Gallery</a>
-							</li>
-							<li class="gallery-body__item">
-								<a href="#">Live stream: Yard 1</a>
-								<div class="gallery-body__item-online"></div>
-							</li>
-							<li class="gallery-body__item">
-								<a href="#">Live stream: Yard 2</a>
-								<div class="gallery-body__item-online"></div>
-							</li>
-							<li class="gallery-body__item">
-								<a href="#">Live stream: Yard 3</a>
-								<div class="gallery-body__item-online"></div>
-							</li>
-						</ul>
-						<div class="gallery__image">
-							<picture><source srcset="img/gallery/dogs.webp" type="image/webp"><img src="img/gallery/dogs.jpg" alt="dogs"></picture>
-							<div class="gallery__image-live">Live</div>
+						<div data-tabs class="tabs">
+							<nav data-tabs-titles class="tabs__navigation">
+								<button type="submit" class="tabs__title _tab-active">Gallery</button>
+								<button type="submit" class="tabs__title online-tabs">Live stream: Yard 1
+									<div class="online-tabs__item-online"></div>
+								</button>
+								<button type="submit" class="tabs__title online-tabs">Live stream: Yard 2
+									<div class="online-tabs__item-online"></div>
+								</button>
+								<button type="submit" class="tabs__title online-tabs">Live stream: Yard 3
+									<div class="online-tabs__item-online"></div>
+								</button>
+							</nav>
+							<div data-tabs-body class="tabs__content">
+								<div class="tabs__body">
+									<picture><source srcset="img/gallery/dogs.webp" type="image/webp"><img src="img/gallery/dogs.jpg" alt="dogs"></picture>
+								</div>
+								<div class="tabs__body live-tabs">
+									<picture><source srcset="img/gallery/dog2.webp" type="image/webp"><img src="img/gallery/dog2.jpg" alt="dogs"></picture>
+									<div class="live-tabs__item-live">Live</div>
+								</div>
+								<div class="tabs__body live-tabs">
+									<picture><source srcset="img/gallery/dogs.webp" type="image/webp"><img src="img/gallery/dogs.jpg" alt="dogs"></picture>
+									<div class="live-tabs__item-live">Live</div>
+								</div>
+								<div class="tabs__body live-tabs">
+									<picture><source srcset="img/gallery/dog2.webp" type="image/webp"><img src="img/gallery/dog2.jpg" alt="dogs"></picture>
+									<div class="live-tabs__item-live">Live</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -551,7 +561,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20211227200940"></script>
+	<script src="js/app.min.js?_v=20211227212324"></script>
 </body>
 
 </html>

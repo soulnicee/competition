@@ -41,13 +41,13 @@
         i = String.prototype.split.call(s, ","),
         o = window.matchMedia(i[0]),
         n = i[1],
-        r = Array.prototype.filter.call(this.оbjects, function (t) {
+        a = Array.prototype.filter.call(this.оbjects, function (t) {
           return t.breakpoint === n;
         });
       o.addListener(function () {
-        t.mediaHandler(o, r);
+        t.mediaHandler(o, a);
       }),
-        this.mediaHandler(o, r);
+        this.mediaHandler(o, a);
     }
   }),
     (t.prototype.mediaHandler = function (t, e) {
@@ -434,9 +434,9 @@
     },
     o = !0,
     n = (t = 500) => {
-      document.documentElement.classList.contains("lock") ? r(t) : a(t);
+      document.documentElement.classList.contains("lock") ? a(t) : r(t);
     },
-    r = (t = 500) => {
+    a = (t = 500) => {
       let e = document.querySelector("body");
       if (o) {
         let s = document.querySelectorAll("[data-lp]");
@@ -453,7 +453,7 @@
           }, t);
       }
     },
-    a = (t = 500) => {
+    r = (t = 500) => {
       let e = document.querySelector("body");
       if (o) {
         let s = document.querySelectorAll("[data-lp]");
@@ -505,19 +505,19 @@
             const s = e.split(","),
               i = s[1],
               n = s[2],
-              r = window.matchMedia(s[0]),
-              a = t.filter(function (t) {
+              a = window.matchMedia(s[0]),
+              r = t.filter(function (t) {
                 if (t.value === i && t.type === n) return !0;
               });
-            o.push({ itemsArray: a, matchMedia: r });
+            o.push({ itemsArray: r, matchMedia: a });
           }),
           o
         );
     }
   }
-  let p = !1;
+  let c = !1;
   setTimeout(() => {
-    if (p) {
+    if (c) {
       let t = new Event("windowScroll");
       window.addEventListener("scroll", function (e) {
         document.dispatchEvent(t);
@@ -557,14 +557,14 @@
             (t = e ? t.item : t),
               e.matches || !e
                 ? (t.classList.add("_spoller-init"),
-                  r(t),
-                  t.addEventListener("click", a))
+                  a(t),
+                  t.addEventListener("click", r))
                 : (t.classList.remove("_spoller-init"),
-                  r(t, !1),
-                  t.removeEventListener("click", a));
+                  a(t, !1),
+                  t.removeEventListener("click", r));
           });
         }
-        function r(t, e = !0) {
+        function a(t, e = !0) {
           const s = t.querySelectorAll("[data-spoller]");
           s.length > 0 &&
             s.forEach((t) => {
@@ -576,14 +576,14 @@
                   (t.nextElementSibling.hidden = !1));
             });
         }
-        function a(t) {
+        function r(t) {
           const e = t.target;
           if (e.closest("[data-spoller]")) {
             const o = e.closest("[data-spoller]"),
               n = o.closest("[data-spollers]"),
-              r = !!n.hasAttribute("data-one-spoller");
+              a = !!n.hasAttribute("data-one-spoller");
             n.querySelectorAll("._slide").length ||
-              (r && !o.classList.contains("_spoller-active") && p(n),
+              (a && !o.classList.contains("_spoller-active") && c(n),
               o.classList.toggle("_spoller-active"),
               ((t, e = 500) => {
                 t.hidden ? i(t, e) : s(t, e);
@@ -591,7 +591,7 @@
               t.preventDefault();
           }
         }
-        function p(t) {
+        function c(t) {
           const e = t.querySelector("[data-spoller]._spoller-active");
           e &&
             (e.classList.remove("_spoller-active"),
@@ -605,6 +605,95 @@
             }),
               n(t.itemsArray, t.matchMedia);
           });
+      }
+    })(),
+    (function () {
+      const t = document.querySelectorAll("[data-tabs]");
+      let e = [];
+      if (t.length > 0) {
+        const s = location.hash.replace("#", "");
+        s.startsWith("tab-") && (e = s.replace("tab-", "").split("-")),
+          t.forEach((t, s) => {
+            t.classList.add("_tab-init"),
+              t.setAttribute("data-tabs-index", s),
+              t.addEventListener("click", n),
+              (function (t) {
+                const s = t.querySelectorAll("[data-tabs-titles]>*"),
+                  i = t.querySelectorAll("[data-tabs-body]>*"),
+                  o = t.dataset.tabsIndex,
+                  n = e[0] == o;
+                if (n) {
+                  t.querySelector(
+                    "[data-tabs-titles]>._tab-active"
+                  ).classList.remove("_tab-active");
+                }
+                i.length > 0 &&
+                  i.forEach((t, i) => {
+                    s[i].setAttribute("data-tabs-title", ""),
+                      t.setAttribute("data-tabs-item", ""),
+                      n && i == e[1] && s[i].classList.add("_tab-active"),
+                      (t.hidden = !s[i].classList.contains("_tab-active"));
+                  });
+              })(t);
+          });
+        let i = l(t, "tabs");
+        i &&
+          i.length &&
+          i.forEach((t) => {
+            t.matchMedia.addEventListener("change", function () {
+              o(t.itemsArray, t.matchMedia);
+            }),
+              o(t.itemsArray, t.matchMedia);
+          });
+      }
+      function o(t, e) {
+        t.forEach((t) => {
+          const s = (t = t.item).querySelector("[data-tabs-titles]"),
+            i = t.querySelectorAll("[data-tabs-title]"),
+            o = t.querySelector("[data-tabs-body]");
+          t.querySelectorAll("[data-tabs-item]").forEach((n, a) => {
+            e.matches
+              ? (o.append(i[a]), o.append(n), t.classList.add("_tab-spoller"))
+              : (s.append(i[a]), t.classList.remove("_tab-spoller"));
+          });
+        });
+      }
+      function n(t) {
+        const e = t.target;
+        if (e.closest("[data-tabs-title]")) {
+          const o = e.closest("[data-tabs-title]"),
+            n = o.closest("[data-tabs]");
+          if (
+            !o.classList.contains("_tab-active") &&
+            !n.querySelectorAll("._slide").length
+          ) {
+            const t = n.querySelector("[data-tabs-title]._tab-active");
+            t && t.classList.remove("_tab-active"),
+              o.classList.add("_tab-active"),
+              (function (t) {
+                const e = t.querySelectorAll("[data-tabs-title]"),
+                  o = t.querySelectorAll("[data-tabs-item]"),
+                  n = t.dataset.tabsIndex,
+                  a = (function (t) {
+                    if (t.hasAttribute("data-tabs-animate"))
+                      return t.dataset.tabsAnimate > 0
+                        ? t.dataset.tabsAnimate
+                        : 500;
+                  })(t);
+                o.length > 0 &&
+                  o.forEach((t, o) => {
+                    e[o].classList.contains("_tab-active")
+                      ? (a ? i(t, a) : (t.hidden = !1),
+                        t.closest(".popup") ||
+                          (location.hash = `tab-${n}-${o}`))
+                      : a
+                      ? s(t, a)
+                      : (t.hidden = !0);
+                  });
+              })(n);
+          }
+          t.preventDefault();
+        }
       }
     })(),
     new e({});
